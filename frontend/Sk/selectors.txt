@@ -1,0 +1,16 @@
+.team-item .shape-team::before
+.team-item .shape-team::after
+.widget-event .tf-info-price:before
+.widget-event .item .item-event-price-bg::before
+.widget-event .item .item-event-price-bg::after
+.event-white-wiget .item .item-event-price-bg::before
+.event-white-wiget .item .item-event-price-bg::after
+.shape-testimonial::before
+.shape-testimonial::after
+.graphic::before
+.graphic::after
+.graphic-h3::before
+.graphic-h3::after
+.line-benefit
+.graphic-tes::before
+.graphic-tes::after

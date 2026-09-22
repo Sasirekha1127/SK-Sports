@@ -1,0 +1,209 @@
+.events-premium-container {
+    --bg: #FAFAFA;
+    --panel: #FFFFFF;
+    --line: #EAEAEA;
+    --ink: #111827;
+    --muted: #6B7280;
+    --accent: #13653a;
+    --accent-dim: rgba(19, 101, 58, 0.08);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Jost", sans-serif;
+    padding: 72px 24px;
+}
+
+.events-premium-container * {
+    box-sizing: border-box;
+}
+
+.events-premium-container .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.events-premium-container .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+.events-premium-container .eyebrow .rule {
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+}
+
+.events-premium-container h1 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.08;
+    margin: 0 0 12px;
+    color: var(--ink);
+}
+
+.events-premium-container .sub {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 48ch;
+    line-height: 1.6;
+    margin: 0 0 40px;
+}
+
+.events-premium-container .season {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    text-transform: none;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.events-premium-container .event-row {
+    display: grid;
+    grid-template-columns: 85px 1fr auto;
+    gap: 28px;
+    align-items: center;
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.events-premium-container .event-row:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--accent);
+}
+
+.events-premium-container .bib {
+    background: var(--accent-dim);
+    color: var(--accent);
+    text-align: center;
+    padding: 18px 12px;
+    border-radius: 12px;
+    font-family: "Oswald", sans-serif;
+}
+
+.events-premium-container .bib .day {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+}
+
+.events-premium-container .bib .month {
+    font-family: "Jost", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.events-premium-container .details h3 {
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+.events-premium-container .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.events-premium-container .meta span::before {
+    content: "•";
+    margin-right: 16px;
+    color: var(--line);
+}
+
+.events-premium-container .meta span:first-child::before {
+    content: none;
+    margin-right: 0;
+}
+
+.events-premium-container .action {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+.events-premium-container .price {
+    font-family: "Oswald", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0;
+}
+
+.events-premium-container .price small {
+    font-family: "Jost", sans-serif;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+.events-premium-container .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.events-premium-container .btn:hover {
+    background: var(--accent);
+    color: #FFFFFF;
+}
+
+@media (max-width: 640px) {
+    .events-premium-container .event-row {
+        grid-template-columns: 64px 1fr;
+        row-gap: 16px;
+    }
+
+    .events-premium-container .bib .day {
+        font-size: 30px;
+    }
+
+    .events-premium-container .action {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}

@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ==========================================================================
+   Smooth & Flicker-Free Repeat Scroll Animation Engine
+   ========================================================================== */
+
+/* Disable legacy animate.css keyframes on .wow elements so our GPU transition handles it */
+.animated.wow,
+.wow.animated {
+  -webkit-animation: none !important;
+  animation: none !important;
+}
+
+/* Base state for all scroll-animated elements when JS engine is active */
+.js-animated .wow {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.85s;
+  will-change: opacity, transform;
+}
+
+/* Pre-scroll directional transform offsets */
+.js-animated .wow.fadeInUp {
+  transform: translate3d(0, 32px, 0);
+}
+
+.js-animated .wow.fadeInDown {
+  transform: translate3d(0, -32px, 0);
+}
+
+.js-animated .wow.fadeInLeft {
+  transform: translate3d(-32px, 0, 0);
+}
+
+.js-animated .wow.fadeInRight {
+  transform: translate3d(32px, 0, 0);
+}
+
+.js-animated .wow.zoomIn {
+  transform: scale3d(0.93, 0.93, 0.93);
+}
+
+/* Active in-view state: glides in smoothly and stays rock-solid without flickering */
+.js-animated .wow[data-in-view="true"],
+.js-animated .wow.in-view {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1) !important;
+}
+
+/* Allow card hover states to lift cleanly */
+.events-premium-container .event-row[data-in-view="true"]:hover,
+.events-premium-container .event-row.in-view:hover {
+  transform: translate3d(0, -4px, 0) !important;
+}
+
+.product-category[data-in-view="true"]:hover,
+.product-category.in-view:hover {
+  transform: translate3d(0, -5px, 0) !important;
+}
+
+/* Accessibility: respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wow,
+  .js-animated .wow,
+  .js-animated .wow[data-in-view="true"],
+  .js-animated .wow.in-view {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+

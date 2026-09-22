@@ -1,0 +1,1 @@
+const fs = require('fs'); const files = ['src/components/sections/Team1.js', 'src/components/sections/Team2.js', 'src/pages/about.js']; files.forEach(file => { let content = fs.readFileSync(file, 'utf8'); content = content.replace(/<div className=\"team-social\">[\s\S]*?<\/div>/g, ''); fs.writeFileSync(file, content); });
