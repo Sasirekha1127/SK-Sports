@@ -136,7 +136,11 @@ export default function Registrations() {
                       <div className="inbox-item-date">{formatShortDate(m.createdAt)}</div>
                     </div>
                     <div className="inbox-item-subject">{m.phone}</div>
-                    <div className="inbox-item-preview">{m.gender ? `Gender: ${m.gender}` : ''}</div>
+                    <div className="inbox-item-preview">
+                      <span style={{ fontWeight: 600, color: 'var(--color-primary)' }}>{m.sport || 'Badminton'}</span>
+                      {m.skill_level ? ` • ${m.skill_level}` : ''}
+                      {m.gender ? ` • ${m.gender}` : ''}
+                    </div>
                   </div>
                 </div>
               ))
@@ -171,7 +175,7 @@ export default function Registrations() {
                   </div>
                   <div className="inbox-sender-details">
                     <h2>{activeMessage.name}</h2>
-                    <p><MailIcon size={14} /> <a href={`mailto:${activeMessage.email}`} style={{ textDecoration: 'underline' }}>{activeMessage.email}</a></p>
+                    <p><MailIcon size={14} /> <a href={`mailto:${activeMessage.email}`} style={{ textDecoration: 'underline' }}>{activeMessage.email || 'No email provided'}</a></p>
                     <p><Phone size={14} /> {activeMessage.phone || 'No phone provided'}</p>
                     <p><Clock size={14} /> {formatLongDate(activeMessage.createdAt)}</p>
                   </div>
@@ -191,14 +195,56 @@ export default function Registrations() {
                   >
                     <Trash2 size={16} color="var(--color-danger)" />
                   </button>
-                  <a href={`mailto:${activeMessage.email}`} className="btn btn-primary" style={{ marginLeft: 8 }}>
-                    Reply
-                  </a>
+                  {activeMessage.email && (
+                    <a href={`mailto:${activeMessage.email}`} className="btn btn-primary" style={{ marginLeft: 8 }}>
+                      Reply
+                    </a>
+                  )}
                 </div>
               </div>
-              <div className="inbox-main-body">
-                {activeMessage.gender ? (
-                  <p><strong>Gender:</strong> {activeMessage.gender}</p>
+              <div className="inbox-main-body" style={{ padding: '24px' }}>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: '16px',
+                  background: 'var(--color-surface, #f8fafc)',
+                  padding: '18px',
+                  borderRadius: '10px',
+                  border: '1px solid var(--color-border, #e2e8f0)',
+                  marginBottom: '20px'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>🏸 Sport</span>
+                    <strong style={{ fontSize: '15px' }}>{activeMessage.sport || 'Badminton'}</strong>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>📊 Skill Level</span>
+                    <strong style={{ fontSize: '15px' }}>{activeMessage.skill_level || 'Beginner'}</strong>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>⏰ Preferred Time</span>
+                    <strong style={{ fontSize: '15px' }}>{activeMessage.training_time || 'Flexible'}</strong>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>📅 Date of Birth</span>
+                    <strong style={{ fontSize: '15px' }}>{activeMessage.dob || 'Not specified'}</strong>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>🚻 Gender</span>
+                    <strong style={{ fontSize: '15px', textTransform: 'capitalize' }}>{activeMessage.gender || 'Not specified'}</strong>
+                  </div>
+                </div>
+
+                {activeMessage.message ? (
+                  <div style={{
+                    background: 'var(--color-surface, #f8fafc)',
+                    padding: '16px 18px',
+                    borderRadius: '10px',
+                    border: '1px solid var(--color-border, #e2e8f0)'
+                  }}>
+                    <span style={{ fontSize: '12px', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block', marginBottom: '6px' }}>💬 Message / Additional Requirements</span>
+                    <p style={{ margin: 0, whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{activeMessage.message}</p>
+                  </div>
                 ) : null}
               </div>
             </>

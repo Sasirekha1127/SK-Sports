@@ -5,18 +5,52 @@ exports.submitContact = async (req, res) => {
     try {
         const { name, email, phone, age, message } = req.body;
 
-        // Basic validation
-        if (!name || !email || !phone) {
-            return res.status(400).json({ success: false, message: 'Name, email, and phone are required.' });
+        const trimmedName = typeof name === 'string' ? name.trim() : '';
+        const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+        const trimmedPhone = typeof phone === 'string' ? phone.trim() : '';
+        const trimmedMessage = typeof message === 'string' ? message.trim() : '';
+
+        // Validation
+        if (!trimmedName || trimmedName.length < 2) {
+            return res.status(400).json({ success: false, message: 'Please provide a valid name (at least 2 characters).' });
         }
 
-        await Contact.create({ name, email, phone, age, message });
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+            return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+        }
+
+        const cleanPhone = trimmedPhone.replace(/[\s\-+()]/g, '');
+        if (!cleanPhone || cleanPhone.length < 10 || cleanPhone.length > 15 || !/^\d+$/.test(cleanPhone)) {
+            return res.status(400).json({ success: false, message: 'Please provide a valid phone number (at least 10 digits).' });
+        }
+
+        if (age !== undefined && age !== null && String(age).trim() !== '') {
+            const ageNum = Number(age);
+            if (isNaN(ageNum) || ageNum < 3 || ageNum > 120) {
+                return res.status(400).json({ success: false, message: 'Please enter a valid age between 3 and 120.' });
+            }
+        }
+
+        if (trimmedMessage && trimmedMessage.length < 3) {
+            return res.status(400).json({ success: false, message: 'Message must be at least 3 characters long.' });
+        }
+
+        const payload = {
+            name: trimmedName,
+            email: trimmedEmail,
+            phone: trimmedPhone,
+            age: age ? String(age).trim() : null,
+            message: trimmedMessage || ''
+        };
+
+        await Contact.create(payload);
 
         // Trigger email notification to Admin and confirmation auto-reply to visitor asynchronously
-        emailService.sendContactNotification({ name, email, phone, age, message }).catch(e => {
+        emailService.sendContactNotification(payload).catch(e => {
             console.error('Async mail notification error:', e.message);
         });
-        emailService.sendContactAutoReply({ name, email, phone, age, message }).catch(e => {
+        emailService.sendContactAutoReply(payload).catch(e => {
             console.error('Async mail auto-reply error:', e.message);
         });
 

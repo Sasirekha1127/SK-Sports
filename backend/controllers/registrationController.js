@@ -1,28 +1,80 @@
 const Registration = require('../models/Registration');
+const emailService = require('../services/emailService');
 
 exports.submitRegistration = async (req, res) => {
     try {
-        const { author, email, telephone, sex } = req.body;
-        // In frontend form it passes author as name and telephone as phone
+        const { 
+            name, author, 
+            phone, telephone, 
+            email, 
+            gender, sex, 
+            dob, 
+            sport, 
+            skill_level, 
+            training_time, 
+            message 
+        } = req.body;
 
-        // Basic validation
-        if (!author || !email || !telephone) {
-            return res.status(400).json({ success: false, message: 'Name, email, and phone are required.' });
+        const rawName = name || author || '';
+        const rawPhone = phone || telephone || '';
+        const rawGender = gender || sex || '';
+
+        const trimmedName = typeof rawName === 'string' ? rawName.trim() : '';
+        const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+        const trimmedPhone = typeof rawPhone === 'string' ? rawPhone.trim() : '';
+        const trimmedGender = typeof rawGender === 'string' ? rawGender.trim() : 'Male';
+        const trimmedDob = typeof dob === 'string' ? dob.trim() : '';
+        const trimmedSport = typeof sport === 'string' ? sport.trim() : 'Badminton';
+        const trimmedSkill = typeof skill_level === 'string' ? skill_level.trim() : 'Beginner';
+        const trimmedTime = typeof training_time === 'string' ? training_time.trim() : 'Flexible';
+        const trimmedMsg = typeof message === 'string' ? message.trim() : '';
+
+        // Validation
+        if (!trimmedName || trimmedName.length < 2) {
+            return res.status(400).json({ success: false, message: 'Please provide your full name (at least 2 characters).' });
         }
 
-        await Registration.create({
-            name: author,
-            email,
-            phone: telephone,
-            gender: sex
-        });
+        const cleanPhone = trimmedPhone.replace(/\D/g, '');
+        if (cleanPhone.length !== 10) {
+            return res.status(400).json({ success: false, message: 'Please provide a valid 10-digit mobile number.' });
+        }
 
-        res.status(201).json({ success: true, message: 'Registration submit successfully.' });
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (trimmedEmail && !emailRegex.test(trimmedEmail)) {
+            return res.status(400).json({ success: false, message: 'Please provide a valid email address.' });
+        }
+
+        const payload = {
+            name: trimmedName,
+            email: trimmedEmail,
+            phone: cleanPhone,
+            gender: trimmedGender,
+            dob: trimmedDob,
+            sport: trimmedSport,
+            skill_level: trimmedSkill,
+            training_time: trimmedTime,
+            message: trimmedMsg
+        };
+
+        await Registration.create(payload);
+
+        // Send email notifications asynchronously
+        emailService.sendRegistrationNotification(payload).catch(e => {
+            console.error('Async mail registration notification error:', e.message);
+        });
+        if (trimmedEmail) {
+            emailService.sendRegistrationAutoReply(payload).catch(e => {
+                console.error('Async mail registration auto-reply error:', e.message);
+            });
+        }
+
+        res.status(201).json({ success: true, message: 'Registration submitted successfully.' });
     } catch (error) {
         console.error('Registration submit error:', error);
         res.status(500).json({ success: false, message: 'Server error while registering.' });
     }
 };
+
 
 exports.getRegistrations = async (req, res) => {
     try {

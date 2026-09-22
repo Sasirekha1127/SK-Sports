@@ -14,10 +14,10 @@ const toDateStr = (val) => {
 }
 
 export const eventsService = {
-  list: () => (http.get('/events').then((r) => r.data.data.map(e => ({ ...e, date: toDateStr(e.event_date), time: e.event_time })))),
-  get: (id) => (http.get(`/events/${id}`).then((r) => { const e = r.data.data; return { ...e, date: toDateStr(e.event_date), time: e.event_time }; })),
-  create: (data) => (http.post('/admin/events', { ...data, event_date: data.date, event_time: data.time }).then((r) => r.data)),
-  update: (id, data) => (http.patch(`/admin/events/${id}`, { ...data, event_date: data.date, event_time: data.time }).then((r) => r.data)),
+  list: () => (http.get('/events').then((r) => r.data.data.map(e => ({ ...e, date: toDateStr(e.event_date), time: e.event_time, featured: !!e.featured })))),
+  get: (id) => (http.get(`/events/${id}`).then((r) => { const e = r.data.data; return { ...e, date: toDateStr(e.event_date), time: e.event_time, featured: !!e.featured }; })),
+  create: (data) => (http.post('/admin/events', { ...data, event_date: data.date, event_time: data.time, featured: data.featured ? 1 : 0 }).then((r) => r.data)),
+  update: (id, data) => (http.patch(`/admin/events/${id}`, { ...data, event_date: data.date, event_time: data.time, featured: data.featured ? 1 : 0 }).then((r) => r.data)),
   remove: (id) => (http.delete(`/admin/events/${id}`).then((r) => r.data)),
   reorder: (orderedIds) => (Promise.resolve()), // Not in real backend yet
 }

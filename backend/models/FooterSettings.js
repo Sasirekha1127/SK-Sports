@@ -7,9 +7,9 @@ class FooterSettings {
             return {
                 description: '',
                 address: '',
-                mon_timing: '4:00 pm–9:00 pm',
-                tue_sat_timing: '5:30 am–9:30 am | 4:00 pm–9:00 pm',
-                sun_timing: '5:30 am–9:30 am',
+                mon_timing: '5:00 am–10:00 pm',
+                tue_sat_timing: '5:00 am–10:00 pm',
+                sun_timing: '5:00 am–10:00 pm',
                 copyright: '©2026 SK Sports. All Rights Reserved.'
             };
         }

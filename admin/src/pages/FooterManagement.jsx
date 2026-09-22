@@ -124,9 +124,9 @@ export default function FooterManagement() {
 
                 {/* Academy Timings */}
                 <Section title="Academy Timings" onSave={() => saveFooter('timings')} saving={savingSection === 'timings'}>
-                    <TextField label="Monday" placeholder="4:00 pm–9:00 pm" value={footer.mon_timing || ''} onChange={e => setF('mon_timing', e.target.value)} />
-                    <TextField label="Tue–Sat (use | to separate morning & evening)" placeholder="5:30 am–9:30 am | 4:00 pm–9:00 pm" value={footer.tue_sat_timing || ''} onChange={e => setF('tue_sat_timing', e.target.value)} />
-                    <TextField label="Sunday" placeholder="5:30 am–9:30 am" value={footer.sun_timing || ''} onChange={e => setF('sun_timing', e.target.value)} />
+                    <TextField label="Monday" placeholder="5:00 am–10:00 pm" value={footer.mon_timing || ''} onChange={e => setF('mon_timing', e.target.value)} />
+                    <TextField label="Tue–Sat (use | to separate morning & evening)" placeholder="5:00 am–10:00 pm" value={footer.tue_sat_timing || ''} onChange={e => setF('tue_sat_timing', e.target.value)} />
+                    <TextField label="Sunday" placeholder="5:00 am–10:00 pm" value={footer.sun_timing || ''} onChange={e => setF('sun_timing', e.target.value)} />
                 </Section>
 
                 {/* Phone Number */}

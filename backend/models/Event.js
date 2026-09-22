@@ -47,7 +47,10 @@ class Event {
         }
         const event_time = data.event_time !== undefined ? data.event_time : (existing?.event_time || '');
         const location = data.location !== undefined ? data.location : (existing?.location || '');
-        const price = data.price !== undefined ? data.price : (existing?.price || 0);
+        let price = data.price !== undefined ? data.price : (existing?.price || 0);
+        if (typeof price === 'string') {
+            price = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+        }
         const image = data.image !== undefined ? data.image : (existing?.image || '');
         const status = data.status !== undefined ? data.status : (existing?.status || 'upcoming');
         const featured = data.featured !== undefined ? (data.featured ? 1 : 0) : (existing?.featured ? 1 : 0);

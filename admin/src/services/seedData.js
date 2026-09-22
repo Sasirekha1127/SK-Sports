@@ -67,14 +67,14 @@ export const seedMedia = [
 
 export const seedHomepage = {
   slides: [
-    { id: 'sl1', subtitle: 'WELCOME TO SK SPORTS', title: 'Premier Ball Badminton Academy', ctaLabel: 'Join our club', ctaLink: '/contact', image: 'images/slides/slide1.jpg', eventTag: 'State Level Tournament', eventDate: 'Oct 20, 2023', eventTime: 'Start 06:00 AM - Until Finish', eventLocation: 'Coimbatore - Trichy Rd, Palladam', order: 0, enabled: true },
+    { id: 'sl1', subtitle: 'WELCOME TO SK SPORTS', title: 'Premier Badminton Academy', ctaLabel: 'Join our club', ctaLink: '/contact', image: 'images/slides/slide1.jpg', eventTag: 'State Level Tournament', eventDate: 'Oct 20, 2023', eventTime: 'Start 06:00 AM - Until Finish', eventLocation: 'Coimbatore - Trichy Rd, Palladam', order: 0, enabled: true },
     { id: 'sl2', subtitle: 'TRAIN WITH CHAMPIONS', title: 'Elevate Your Badminton Skills', ctaLabel: 'Join our club', ctaLink: '/contact', image: 'images/slides/slide2.jpg', eventTag: 'Academy Trials', eventDate: 'Oct 20, 2023', eventTime: 'Start 06:00 AM - Until Finish', eventLocation: 'Coimbatore - Trichy Rd, Palladam', order: 1, enabled: true },
     { id: 'sl3', subtitle: 'EXPERT COACHING', title: 'Build Stamina, Speed & Strategy', ctaLabel: 'Join our club', ctaLink: '/contact', image: 'images/slides/slide3.jpg', eventTag: 'Summer Camp', eventDate: 'Oct 20, 2023', eventTime: 'Start 06:00 AM - Until Finish', eventLocation: 'Coimbatore - Trichy Rd, Palladam', order: 2, enabled: true },
   ],
   about: {
     subtitle: 'Welcome to SK Sports!',
-    title: 'SK Sports - Your Ultimate Ball Badminton Academy',
-    body: 'Join our passionate ball badminton community, where we offer top-tier coaching, organize competitive tournaments, and help you master every aspect of the sport.',
+    title: 'SK Sports - Your Ultimate Badminton Academy',
+    body: 'Join our passionate badminton community, where we offer top-tier coaching, organize competitive tournaments, and help you master every aspect of the sport.',
     image: 'images/about/badminton-court.png',
     buttonLabel: 'Find out more',
     buttonLink: '/about',

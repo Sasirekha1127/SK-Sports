@@ -6,11 +6,11 @@ async function seed() {
         VALUES (1, ?, ?, ?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE description=VALUES(description), address=VALUES(address)
     `, [
-        'Welcome to SK Sports Academy! Discover the joy of Ball Badminton, connect with fellow enthusiasts, and unlock your full potential with our expert coaching and training programs.',
+        'Welcome to SK Sports Academy! Discover the joy of Badminton, connect with fellow enthusiasts, and unlock your full potential with our expert coaching and training programs.',
         '2/364, Kalivelampatti Pirivu, Coimbatore - Trichy Rd, opp. Kongu Kalyana Mandapam, Palladam, Tamil Nadu 641662',
-        '4:00 pm–9:00 pm',
-        '5:30 am–9:30 am | 4:00 pm–9:00 pm',
-        '5:30 am–9:30 am',
+        '5:00 am–10:00 pm',
+        '5:00 am–10:00 pm',
+        '5:00 am–10:00 pm',
         '©2026 SK Sports. All Rights Reserved.'
     ]);
     console.log('Footer seed OK');
